@@ -1,0 +1,40 @@
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Bot Application.dll.config
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Bot Application.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Bot Application.pdb
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Autofac.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Chronic.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Microsoft.Bot.Builder.Autofac.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Microsoft.Bot.Builder.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Microsoft.Bot.Connector.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Microsoft.IdentityModel.Protocol.Extensions.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Microsoft.Rest.ClientRuntime.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Microsoft.WindowsAzure.Configuration.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Newtonsoft.Json.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\System.IdentityModel.Tokens.Jwt.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\System.Net.Http.Formatting.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\System.Web.Http.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\System.Web.Http.WebHost.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Autofac.xml
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Microsoft.Bot.Builder.xml
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Microsoft.Bot.Builder.Autofac.xml
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Microsoft.Bot.Connector.xml
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Microsoft.IdentityModel.Protocol.Extensions.xml
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Microsoft.WindowsAzure.Configuration.xml
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\Newtonsoft.Json.xml
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\System.IdentityModel.Tokens.Jwt.xml
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\System.Net.Http.Formatting.xml
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\System.Web.Http.xml
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\System.Web.Http.WebHost.xml
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\ar\Microsoft.Bot.Builder.resources.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\cs\Microsoft.Bot.Builder.resources.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\de-dE\Microsoft.Bot.Builder.resources.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\en\Microsoft.Bot.Builder.resources.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\es\Microsoft.Bot.Builder.resources.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\fa\Microsoft.Bot.Builder.resources.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\fr\Microsoft.Bot.Builder.resources.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\ja\Microsoft.Bot.Builder.resources.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\ru\Microsoft.Bot.Builder.resources.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\zh-hans\Microsoft.Bot.Builder.resources.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\obj\Debug\RajasthanTourismAssistance.csprojResolveAssemblyReference.cache
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\obj\Debug\Bot Application.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\obj\Debug\Bot Application.pdb
