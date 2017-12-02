@@ -136,6 +136,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Model\Accommodation.cs" />
+    <Compile Include="Model\BestPlaces.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\SubCategory.cs" />

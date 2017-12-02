@@ -59,17 +59,39 @@ namespace RajasthanTourismAssitance.Dialogs
             Attachment plAttachment = welcomeCard.ToAttachment();
             reply.Attachments.Add(plAttachment);
             await context.PostAsync(reply);
-            context.Wait(SelectCity);
+            context.Wait(SelectVisitStyle);
         }
 
 
-        private async Task SelectCity(IDialogContext context, IAwaitable<IMessageActivity> result)
+        private async Task SelectVisitStyle(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var activity = await result as Activity;
-            Activity reply = activity.CreateReply($"Please let me know city name");
-            await context.PostAsync(reply);
-            context.Wait(ShowCategories);
+            int selectedValue = Convert.ToInt16(activity.Text);
+            if (selectedValue == 2)
+            {
+                Activity reply = activity.CreateReply($"Please let me know city name");
+                await context.PostAsync(reply);
+                context.Wait(ShowCategories);
+            }
+            else
+            {
+                List<BestPlaces> bestPlaces = DBHelper.Instance.GetBestPlaces();
+
+                Activity reply = activity.CreateReply();
+                reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+
+                foreach (BestPlaces bestPlace in bestPlaces)
+                {
+                    reply.Attachments.Add(CreateCardInDetailText(bestPlace.ImageUrl, bestPlace.Place, bestPlace.Description, bestPlace.Hyperlink));
+                }
+
+                await context.PostAsync(reply);
+
+                context.Wait(StartConversationAsync);
+            }
         }
+
+       
 
         private async Task ShowCategories(IDialogContext context, IAwaitable<IMessageActivity> result)
         {

@@ -152,6 +152,35 @@ namespace RajasthanTourismAssistance.Utility
             return touristPlaceList;
         }
 
+        public List<BestPlaces> GetBestPlaces()
+        {
+            String sql = "SELECT * FROM Best_Places";
+            List<BestPlaces> bestPlacesList = new List<BestPlaces>();
+
+            using (MySqlConnection conn = new MySqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["RajasthanTourismDB_ConnectionString"].ConnectionString;
+                conn.Open();
+
+                using (MySqlCommand command = new MySqlCommand(sql, conn))
+                {
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        BestPlaces bestPlaces = new BestPlaces();
+                        bestPlaces.Place = reader["Place"].ToString();
+                        bestPlaces.Description = reader["Description"].ToString();
+                        bestPlaces.ImageUrl = reader["ImageUrl"].ToString();
+                        bestPlaces.Hyperlink = reader["Hyperlink"].ToString();
+                        bestPlacesList.Add(bestPlaces);
+                    }
+                    reader.Close();
+                }
+            }
+            return bestPlacesList;
+        }
+
         //public List<Accommodation> GetHotelsPlaces(int subCategoryID, int cityID)
         //{
         //    String sql = "SELECT * FROM Accommodaton where SubCategoryID=@1 AND CityID=@2";
