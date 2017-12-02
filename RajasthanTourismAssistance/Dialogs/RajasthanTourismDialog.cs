@@ -31,13 +31,13 @@ namespace RajasthanTourismAssitance.Dialogs
             {
                 Value = "1",
                 Type = "postBack",
-                Title = "Best Places to visit",
+                Title = "Best Places",
             };
             CardAction cityWiseTourism = new CardAction()
             {
                 Value = "2",
                 Type = "postBack",
-                Title = "City wise Tourism"
+                Title = "City Wise Tourism"
             };
 
 
@@ -133,10 +133,10 @@ namespace RajasthanTourismAssitance.Dialogs
             var activity = await result as Activity;
             String categoryName = activity.Text;
 
-            //int categoryID = DBHelper.Instance.GetCityID(categoryName);
+            int categoryID = DBHelper.Instance.GetCityID(categoryName);
 
 
-            List<SubCategory> categories = DBHelper.Instance.GetSubCategories();
+            List<SubCategory> categories = DBHelper.Instance.GetSubCategories(categoryID);
 
             Activity reply = activity.CreateReply();
             reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
@@ -170,7 +170,7 @@ namespace RajasthanTourismAssitance.Dialogs
 
             await context.PostAsync(reply);
 
-            context.Wait(ShowTouristPlaces);
+            context.Wait(StartConversationAsync);
         }
 
         private Attachment CreateCardInDetailText(String imageUrl, String value, String description, string url)
@@ -183,7 +183,7 @@ namespace RajasthanTourismAssitance.Dialogs
             {
                 Value = url,
                 Type = ActionTypes.OpenUrl,
-                Title = "more..."
+                Title = "more..." 
             };
 
             cardButtons.Add(plButton);
