@@ -5,7 +5,7 @@ using Microsoft.Bot.Connector;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace IHelpInRajasthan.Dialogs
+namespace RajasthanTourismAssitance.Dialogs
 {
     [Serializable]
     public class RajasthanTourismDialogs : IDialog<object>

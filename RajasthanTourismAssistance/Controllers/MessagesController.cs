@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using RajasthanTourismAssitance.Dialogs;
 
 namespace RajasthanTourismAssistance
 {
@@ -18,7 +19,7 @@ namespace RajasthanTourismAssistance
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new Dialogs.RajasthanTourismDialog());
+                await Conversation.SendAsync(activity, () => new RajasthanTourismDialogs());
             }
             else
             {
