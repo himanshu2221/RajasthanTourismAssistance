@@ -51,7 +51,7 @@ namespace RajasthanTourismAssitance.Dialogs
             {
                 Title = "How may I help you?",
                 Text = "Rajasthan Tourism bot provides many services like searching destinations, booking accommodation and transportation on your favorite chat messengers including Facebook, Skype etc.",
-                Images = new List<CardImage> { new CardImage("https://despatchbay.com/assets/images/couriers/courier-van-dhl.png") },
+                Images = new List<CardImage> { new CardImage("https://image.ibb.co/iAgtzb/Rajasthan_Bot.png") },
                 Buttons = new List<CardAction> { bestTouristPlaces, cityWiseTourism }
             };
 
