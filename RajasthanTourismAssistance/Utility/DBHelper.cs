@@ -122,8 +122,8 @@ namespace RajasthanTourismAssistance.Utility
 
         public List<TouristPlace> GetTouristPlaces(int subCategoryID, int cityID)
         {
-            String sql = "SELECT * FROM Tourist_Places where SubCategoryID=@1 AND CityID=@2";
-            List<TouristPlace> touristPlacesList = new List<TouristPlace>();
+            String sql = "SELECT * FROM Tourist_Place where SubCategoryID=@1 AND CityID=@2";
+            List<TouristPlace> touristPlaceList = new List<TouristPlace>();
 
             using (MySqlConnection conn = new MySqlConnection())
             {
@@ -138,16 +138,17 @@ namespace RajasthanTourismAssistance.Utility
 
                     while (reader.Read())
                     {
-                        TouristPlace touristPlaces = new TouristPlace();
-                        touristPlaces.places = reader["Places"].ToString();
-                        touristPlaces.imageUrl = reader["ImageUrl"].ToString();
-                        touristPlaces.description = reader["Description"].ToString();
-                        touristPlacesList.Add(touristPlaces);
+                        TouristPlace touristPlace = new TouristPlace();
+                        touristPlace.place = reader["Place"].ToString();
+                        touristPlace.imageUrl = reader["ImageUrl"].ToString();
+                        touristPlace.description = reader["Description"].ToString();
+                        touristPlace.hyperlink = reader["Hyperlink"].ToString();
+                        touristPlaceList.Add(touristPlace);
                     }
                     reader.Close();
                 }
             }
-            return touristPlacesList;
+            return touristPlaceList;
         }
 
 

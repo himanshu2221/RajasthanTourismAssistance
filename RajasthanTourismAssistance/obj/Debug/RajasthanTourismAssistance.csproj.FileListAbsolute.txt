@@ -35,6 +35,8 @@ H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\fr\Microsoft.B
 H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\ja\Microsoft.Bot.Builder.resources.dll
 H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\ru\Microsoft.Bot.Builder.resources.dll
 H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\zh-hans\Microsoft.Bot.Builder.resources.dll
-H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\obj\Debug\RajasthanTourismAssistance.csprojResolveAssemblyReference.cache
 H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\obj\Debug\Bot Application.dll
 H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\obj\Debug\Bot Application.pdb
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\MySql.Data.dll
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\bin\MySql.Data.xml
+H:\Prec\RajasthanTourismAssistance\RajasthanTourismAssistance\obj\Debug\RajasthanTourismAssistance.csprojResolveAssemblyReference.cache

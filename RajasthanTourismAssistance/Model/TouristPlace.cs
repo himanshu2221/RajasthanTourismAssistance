@@ -8,7 +8,7 @@ namespace RajasthanTourismAssistance.Model
     public class TouristPlace
     {
 
-        public string places { set; get; }
+        public string place { set; get; }
         public int subCategoryId { set; get; }
         public int cityId { set; get; }
         public string description { set; get; }

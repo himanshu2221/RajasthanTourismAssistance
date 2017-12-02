@@ -165,7 +165,7 @@ namespace RajasthanTourismAssitance.Dialogs
 
             foreach (TouristPlace ob in allPlaces)
             {
-                reply.Attachments.Add(CreateCardInDetailText(ob.imageUrl, ob.places, ob.description));
+                reply.Attachments.Add(CreateCardInDetailText(ob.imageUrl, ob.place, ob.description,ob.hyperlink));
             }
 
             await context.PostAsync(reply);
@@ -173,7 +173,7 @@ namespace RajasthanTourismAssitance.Dialogs
             context.Wait(ShowTouristPlaces);
         }
 
-        private Attachment CreateCardInDetailText(String imageUrl, String value, String description)
+        private Attachment CreateCardInDetailText(String imageUrl, String value, String description, string url)
         {
             List<CardAction> cardButtons = new List<CardAction>();
             List<CardImage> cardImages = new List<CardImage>();
@@ -181,8 +181,8 @@ namespace RajasthanTourismAssitance.Dialogs
 
             CardAction plButton = new CardAction()
             {
-                Value = value,
-                Type = ActionTypes.PostBack,
+                Value = url,
+                Type = ActionTypes.OpenUrl,
                 Title = "more..."
             };
 

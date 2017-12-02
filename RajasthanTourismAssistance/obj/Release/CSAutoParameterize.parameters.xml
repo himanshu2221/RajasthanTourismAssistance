@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="RajasthanTourismDB_ConnectionString-Web.config Connection String" description="RajasthanTourismDB_ConnectionString Connection String used in web.config by the application to access the database." defaultValue="server=182.50.133.78;port=3306;database=RajasthanTourismAssistance_DB;uid=pooja12221;pwd=Rhello@123" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="H:\\Prec\\RajasthanTourismAssistance\\RajasthanTourismAssistance\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='RajasthanTourismDB_ConnectionString']/@connectionString" />
+  </parameter>
+</parameters>
