@@ -89,9 +89,9 @@ namespace RajasthanTourismAssistance.Utility
         }
 
 
-        public List<SubCategory> GetSubCategories(int categoryID)
+        public List<SubCategory> GetSubCategories()
         {
-            String sql = "SELECT * FROM SubCategory where CategoryID = @1";
+            String sql = "SELECT * FROM SubCategory where CategoryID ";
             List<SubCategory> subCategoryList = new List<SubCategory>();
 
             using (MySqlConnection conn = new MySqlConnection())
@@ -100,7 +100,7 @@ namespace RajasthanTourismAssistance.Utility
                 conn.Open();
                 using (MySqlCommand command = new MySqlCommand(sql, conn))
                 {
-                    command.Parameters.AddWithValue("@1",categoryID);
+                    //command.Parameters.AddWithValue("@1",categoryID);
                         MySqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read())
@@ -152,7 +152,36 @@ namespace RajasthanTourismAssistance.Utility
             return touristPlaceList;
         }
 
+        //public List<Accommodation> GetHotelsPlaces(int subCategoryID, int cityID)
+        //{
+        //    String sql = "SELECT * FROM Accommodaton where SubCategoryID=@1 AND CityID=@2";
+        //    List<Accommodation> accommodationList = new List<Accommodation>();
 
+        //    using (MySqlConnection conn = new MySqlConnection())
+        //    {
+        //        conn.ConnectionString = ConfigurationManager.ConnectionStrings["RajasthanTourismDB_ConnectionString"].ConnectionString;
+        //        conn.Open();
+        //        using (MySqlCommand command = new MySqlCommand(sql, conn))
+        //        {
+        //            command.Parameters.AddWithValue("@1", subCategoryID);
+        //            command.Parameters.AddWithValue("@2", cityID);
+
+        //            MySqlDataReader reader = command.ExecuteReader();
+
+        //            while (reader.Read())
+        //            {
+        //                Accommodation accommodation = new Accommodation();
+        //                accommodation.Name = reader["Name"].ToString();
+        //                accommodation.Name = reader["ImageUrl"].ToString();
+        //                accommodation.Discription = reader["Description"].ToString();
+        //                accommodation.Address = reader["Address"].ToString();
+        //                accommodationList.Add(accommodation);
+        //            }
+        //            reader.Close();
+        //        }
+        //    }
+        //    return accommodationList;
+        //}
 
 
     }
