@@ -3,68 +3,207 @@ using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using System.Collections.Generic;
+using System.Collections;
 
-namespace RajasthanTourismAssistance.Dialogs
+namespace IHelpInRajasthan.Dialogs
 {
     [Serializable]
-    public class RajasthanTourismDialog : IDialog<object>
+    public class RajasthanTourismDialogs : IDialog<object>
     {
+        protected int cityID = 0;
+
         public Task StartAsync(IDialogContext context)
         {
-            context.Wait(MessageReceivedAsync);
+            context.Wait(StartConversationAsync);
 
             return Task.CompletedTask;
         }
 
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
+        //Cards
+        private async Task StartConversationAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var activity = await result as Activity;
 
-            // User options
-            CardAction bestInRajasthan = new CardAction()
+            // User options shown via Adaptive Card
+            CardAction bestTouristPlaces = new CardAction()
             {
                 Value = "1",
                 Type = "postBack",
-                Title = "Search Best Places In Rajasthan",
+                Title = "Best Tourist Places",
             };
-            CardAction bestInSpecificCity = new CardAction()
+            CardAction cityWiseTourism = new CardAction()
             {
                 Value = "2",
                 Type = "postBack",
-                Title = "Search By Citi"
+                Title = "City wise Tourism"
             };
 
 
             // Welcome messages with user actions
-            Activity reply = activity.CreateReply($"Welcome in Rajasthan Chatbot!");
+            Activity reply = activity.CreateReply($"Welcome in Rajasthan Tourism!");
             reply.Recipient = activity.From;
             reply.Type = "message";
             reply.Attachments = new List<Attachment>();
 
             var welcomeCard = new ThumbnailCard
             {
-
-                Title = "Please select what you want to do?",
-                Text = "Rajasthan bot provides you many services on your favorite chat messengers including Facebook, Skype etc.",
+                Title = "How may I help you?",
+                Text = "Rajasthan Tourism bot provides many services like searching destinations, booking accommodation and transportation on your favorite chat messengers including Facebook, Skype etc.",
                 Images = new List<CardImage> { new CardImage("https://despatchbay.com/assets/images/couriers/courier-van-dhl.png") },
-                Buttons = new List<CardAction> { bestInRajasthan, bestInSpecificCity }
+                Buttons = new List<CardAction> { bestTouristPlaces, cityWiseTourism }
             };
 
 
             Attachment plAttachment = welcomeCard.ToAttachment();
             reply.Attachments.Add(plAttachment);
             await context.PostAsync(reply);
-            context.Wait(HandleUserSelectedOption);
+            context.Wait(SelectCity);
         }
 
-        private async Task HandleUserSelectedOption(IDialogContext context, IAwaitable<IMessageActivity> result)
+
+        private async Task SelectCity(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            var message = await result as Activity;
-            int selectedValue = Convert.ToInt32(message.Value);
-            if (selectedValue == 1)
-            {
-
-            }
+            var activity = await result as Activity;
+            Activity reply = activity.CreateReply($"Please let me know city name");
+            await context.PostAsync(reply);
+            context.Wait(ShowCategories);
         }
+
+        private async Task ShowCategories(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var activity = await result as Activity;
+            String cityName = activity.Text;
+
+            cityID = DBHelper.Instance.GetCityID(cityName.ToUpper());
+
+            List<Category> categories = DBHelper.Instance.GetCategories();
+
+            Activity reply = activity.CreateReply();
+            reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+
+            foreach (Category category in categories)
+            {
+                reply.Attachments.Add(CreateCard(category.url, category.name));
+            }
+
+            await context.PostAsync(reply);
+
+            context.Wait(ShowSubCategories);
+        }
+
+
+        private Attachment CreateCard(String imageUrl, String value)
+        {
+            List<CardAction> cardButtons = new List<CardAction>();
+            List<CardImage> cardImages = new List<CardImage>();
+            cardImages.Add(new CardImage(imageUrl));
+
+            CardAction plButton = new CardAction()
+            {
+                Value = value,
+                Type = ActionTypes.PostBack,
+                Title = value
+            };
+
+            cardButtons.Add(plButton);
+
+            HeroCard plCard = new HeroCard()
+            {
+                // Title = "FORTS",
+                // Subtitle = $"{cardContent.Key} Wikipedia Page",
+                Images = cardImages,
+                Buttons = cardButtons
+            };
+
+
+            Attachment attachment = new Attachment()
+            {
+                ContentType = HeroCard.ContentType,
+                Content = plCard
+            };
+
+            return attachment;
+        }
+
+
+        private async Task ShowSubCategories(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var activity = await result as Activity;
+            String categoryName = activity.Text;
+
+            //int categoryID = DBHelper.Instance.GetCityID(categoryName);
+
+
+            List<SubCategory> categories = DBHelper.Instance.GetSubCategories();
+
+            Activity reply = activity.CreateReply();
+            reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+
+            foreach (SubCategory subCategory in categories)
+            {
+                reply.Attachments.Add(CreateCard(subCategory.imageUrl, subCategory.subCategoryName));
+            }
+
+            await context.PostAsync(reply);
+
+            context.Wait(ShowTouristPlaces);
+
+        }
+
+        private async Task ShowTouristPlaces(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var activity = await result as Activity;
+            String subCategoryName = activity.Text;
+            Activity reply = activity.CreateReply();
+            reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+
+            int subCategoryID = DBHelper.Instance.GetSubCategoryID(subCategoryName);
+
+            List<TouristPlaces> allPlaces = DBHelper.Instance.GetTouristPlaces(subCategoryID, cityID);
+
+            foreach (TouristPlaces ob in allPlaces)
+            {
+                reply.Attachments.Add(CreateCardInDetailText(ob.imageUrl, ob.places, ob.description));
+            }
+
+            await context.PostAsync(reply);
+
+            context.Wait(ShowTouristPlaces);
+        }
+
+        private Attachment CreateCardInDetailText(String imageUrl, String value, String description)
+        {
+            List<CardAction> cardButtons = new List<CardAction>();
+            List<CardImage> cardImages = new List<CardImage>();
+            cardImages.Add(new CardImage(imageUrl));
+
+            CardAction plButton = new CardAction()
+            {
+                Value = value,
+                Type = ActionTypes.PostBack,
+                Title = "more..."
+            };
+
+            cardButtons.Add(plButton);
+
+            HeroCard plCard = new HeroCard()
+            {
+                Title = value,
+                Subtitle = description,
+                Images = cardImages,
+                Buttons = cardButtons
+            };
+
+
+            Attachment attachment = new Attachment()
+            {
+                ContentType = HeroCard.ContentType,
+                Content = plCard
+            };
+
+            return attachment;
+        }
+
     }
 }
+
