@@ -133,10 +133,10 @@ namespace RajasthanTourismAssitance.Dialogs
             var activity = await result as Activity;
             String categoryName = activity.Text;
 
-            //int categoryID = DBHelper.Instance.GetCityID(categoryName);
+            int categoryID = DBHelper.Instance.GetCategoryID(categoryName);
 
 
-            List<SubCategory> categories = DBHelper.Instance.GetSubCategories();
+            List<SubCategory> categories = DBHelper.Instance.GetSubCategories(categoryID);
 
             Activity reply = activity.CreateReply();
             reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;

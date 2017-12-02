@@ -26,7 +26,7 @@ namespace RajasthanTourismAssistance.Utility
 
         public int GetCategoryID(string param)
         {
-            string sql = "SELECT * FROM SubCategory where SubCategoryName=@1";
+            string sql = "SELECT * FROM Category where CategoryName=@1";
             int categoryID = GetID(param, sql, "CategoryID");
             return categoryID;
         }
@@ -89,9 +89,9 @@ namespace RajasthanTourismAssistance.Utility
         }
 
 
-        public List<SubCategory> GetSubCategories()
+        public List<SubCategory> GetSubCategories(int categoryID)
         {
-            String sql = "SELECT * FROM SubCategory where CategoryID ";
+            String sql = "SELECT * FROM SubCategory where CategoryID=@1";
             List<SubCategory> subCategoryList = new List<SubCategory>();
 
             using (MySqlConnection conn = new MySqlConnection())
@@ -100,7 +100,7 @@ namespace RajasthanTourismAssistance.Utility
                 conn.Open();
                 using (MySqlCommand command = new MySqlCommand(sql, conn))
                 {
-                    //command.Parameters.AddWithValue("@1",categoryID);
+                    command.Parameters.AddWithValue("@1",categoryID);
                         MySqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read())
