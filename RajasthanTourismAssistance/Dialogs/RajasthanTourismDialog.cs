@@ -4,6 +4,8 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using System.Collections.Generic;
 using System.Collections;
+using RajasthanTourismAssistance.Utility;
+using RajasthanTourismAssistance.Model;
 
 namespace RajasthanTourismAssitance.Dialogs
 {
@@ -29,7 +31,7 @@ namespace RajasthanTourismAssitance.Dialogs
             {
                 Value = "1",
                 Type = "postBack",
-                Title = "Best Tourist Places",
+                Title = "Best Places to visit",
             };
             CardAction cityWiseTourism = new CardAction()
             {
@@ -83,7 +85,7 @@ namespace RajasthanTourismAssitance.Dialogs
 
             foreach (Category category in categories)
             {
-                reply.Attachments.Add(CreateCard(category.url, category.name));
+                reply.Attachments.Add(CreateCard(category.imageUrl, category.categoryName));
             }
 
             await context.PostAsync(reply);
@@ -159,9 +161,9 @@ namespace RajasthanTourismAssitance.Dialogs
 
             int subCategoryID = DBHelper.Instance.GetSubCategoryID(subCategoryName);
 
-            List<TouristPlaces> allPlaces = DBHelper.Instance.GetTouristPlaces(subCategoryID, cityID);
+            List<TouristPlace> allPlaces = DBHelper.Instance.GetTouristPlaces(subCategoryID, cityID);
 
-            foreach (TouristPlaces ob in allPlaces)
+            foreach (TouristPlace ob in allPlaces)
             {
                 reply.Attachments.Add(CreateCardInDetailText(ob.imageUrl, ob.places, ob.description));
             }

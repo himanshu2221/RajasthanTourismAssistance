@@ -7,7 +7,7 @@ namespace RajasthanTourismAssistance.Model
 {
     public class SubCategory
     {
-        public string subcategoryId { get; set; }
+        public int subCategoryId { get; set; }
         public string subCategoryName { get; set; }
         public int categoryId { get; set; }
         public string imageUrl { get; set; }

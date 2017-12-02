@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using RajasthanTourismAssistance.Model;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -30,7 +31,7 @@ namespace RajasthanTourismAssistance.Utility
             return categoryID;
         }
 
-        public int GetSubCategory(string param)
+        public int GetSubCategoryID(string param)
         {
             string sql = "SELECT * FROM SubCategory where SubCategoryName=@1";
             int subCategoryID = GetID(param, sql, "SubCategoryID");
@@ -60,7 +61,94 @@ namespace RajasthanTourismAssistance.Utility
             return id;
         }
 
-        
+        public List<Category> GetCategories()
+        {
+            String sql = "SELECT * FROM Category";
+            List<Category> categoryList = new List<Category>();
+
+            using (MySqlConnection conn = new MySqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["RajasthanTourismDB_ConnectionString"].ConnectionString;
+                conn.Open();
+                using (MySqlCommand command = new MySqlCommand(sql, conn))
+                {
+                    //command.Parameters.AddWithValue("@1", cityName);
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Category category = new Category();
+                        category.categoryName = reader["CategoryName"].ToString();
+                        category.imageUrl = reader["ImageUrl"].ToString();
+                        categoryList.Add(category);
+                    }
+                    reader.Close();
+                }
+            }
+            return categoryList;
+        }
+
+
+        public List<SubCategory> GetSubCategories()
+        {
+            String sql = "SELECT * FROM SubCategory";
+            List<SubCategory> subCategoryList = new List<SubCategory>();
+
+            using (MySqlConnection conn = new MySqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["RajasthanTourismDB_ConnectionString"].ConnectionString;
+                conn.Open();
+                using (MySqlCommand command = new MySqlCommand(sql, conn))
+                {
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        SubCategory subCategory = new SubCategory();
+                        subCategory.subCategoryName = reader["SubCategoryName"].ToString();
+                        subCategory.imageUrl = reader["ImageUrl"].ToString();
+
+                        subCategory.subCategoryId = Convert.ToInt32(reader["SubCategoryID"]);
+                        subCategory.categoryId = Convert.ToInt32(reader["CategoryID"]);
+
+                        subCategoryList.Add(subCategory);
+                    }
+                    reader.Close();
+                }
+            }
+            return subCategoryList;
+        }
+
+
+        public List<TouristPlace> GetTouristPlaces(int subCategoryID, int cityID)
+        {
+            String sql = "SELECT * FROM Tourist_Places where SubCategoryID=@1 AND CityID=@2";
+            List<TouristPlace> touristPlacesList = new List<TouristPlace>();
+
+            using (MySqlConnection conn = new MySqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["RajasthanTourismDB_ConnectionString"].ConnectionString;
+                conn.Open();
+                using (MySqlCommand command = new MySqlCommand(sql, conn))
+                {
+                    command.Parameters.AddWithValue("@1", subCategoryID);
+                    command.Parameters.AddWithValue("@2", cityID);
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        TouristPlace touristPlaces = new TouristPlace();
+                        touristPlaces.places = reader["Places"].ToString();
+                        touristPlaces.imageUrl = reader["ImageUrl"].ToString();
+                        touristPlaces.description = reader["Description"].ToString();
+                        touristPlacesList.Add(touristPlaces);
+                    }
+                    reader.Close();
+                }
+            }
+            return touristPlacesList;
+        }
 
 
 
